@@ -22,6 +22,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
   const slides = [
     {
       id: 1,
@@ -50,6 +52,7 @@ const Hero = () => {
   ];
 
   useEffect(() => {
+    setIsLoaded(true);
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 7000);
@@ -82,7 +85,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-[90vh] min-h-[600px] overflow-hidden">
+    <section className="relative h-[100svh] min-h-[600px] max-h-[900px] overflow-hidden safe-area-padding">
       {/* Background Image Slider */}
       {slides.map((slide, index) => (
         <div
@@ -95,78 +98,88 @@ const Hero = () => {
             src={slide.image}
             alt={slide.title}
             fill
-            priority
+            priority={index === 0}
             className="object-cover object-center"
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40" />
         </div>
       ))}
 
       {/* Content */}
-      <div className="container-custom relative h-full flex flex-col justify-center">
+      <div className="container-custom relative h-full flex flex-col justify-center items-start">
         <motion.div
           key={currentSlide}
           initial="hidden"
           animate="show"
           exit="exit"
           variants={container}
-          className="max-w-3xl text-white"
+          className="w-full max-w-4xl text-white z-10"
         >
           <motion.h1
             variants={item}
-            className="text-5xl md:text-6xl font-bold mb-4"
+            className="responsive-heading-1 mb-4 sm:mb-6 text-white"
           >
             {slides[currentSlide].title}
           </motion.h1>
           <motion.p 
             variants={item} 
-            className="text-xl md:text-2xl mb-8 text-gray-100"
+            className="responsive-text-lg mb-8 sm:mb-10 text-gray-100 leading-relaxed max-w-2xl"
           >
             {slides[currentSlide].subtitle}
           </motion.p>
-          <motion.div variants={item} className="flex flex-wrap gap-4">
-            <Button asChild size="lg" className="rounded-md text-base">
+          <motion.div variants={item} className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6">
+            <Button asChild size="lg" className="responsive-button bg-primary hover:bg-primary/90">
               <Link href={slides[currentSlide].link}>
                 {slides[currentSlide].cta}
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" size="lg" className="rounded-md text-base bg-transparent text-white border-white hover:bg-white hover:text-black">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="responsive-button bg-transparent text-white border-white hover:bg-white hover:text-black transition-all duration-300"
+                >
                   Оставить заявку
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
+              <DialogContent className="responsive-modal">
                 <DialogHeader>
-                  <DialogTitle>Оставить заявку</DialogTitle>
+                  <DialogTitle className="text-xl sm:text-2xl">Оставить заявку</DialogTitle>
                   <DialogDescription>
                     Заполните форму и наш менеджер свяжется с вами в ближайшее время
                   </DialogDescription>
                 </DialogHeader>
-                <form className="space-y-4 mt-4">
-                  <div className="grid grid-cols-1 gap-4">
+                <form className="responsive-form mt-6">
+                  <div className="grid grid-cols-1 gap-4 sm:gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Имя</Label>
-                      <Input id="name" placeholder="Ваше имя" />
+                      <Label htmlFor="name" className="text-sm font-medium">Имя</Label>
+                      <Input id="name" placeholder="Ваше имя" className="responsive-input" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="email@example.com" />
+                      <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+                      <Input id="email" type="email" placeholder="email@example.com" className="responsive-input" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Телефон</Label>
-                      <Input id="phone" placeholder="+7 (___) ___-__-__" />
+                      <Label htmlFor="phone" className="text-sm font-medium">Телефон</Label>
+                      <Input id="phone" placeholder="+7 (___) ___-__-__" className="responsive-input" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="comment">Комментарий</Label>
-                      <Textarea id="comment" placeholder="Опишите ваш запрос" rows={3} />
+                      <Label htmlFor="comment" className="text-sm font-medium">Комментарий</Label>
+                      <Textarea 
+                        id="comment" 
+                        placeholder="Опишите ваш запрос" 
+                        rows={4} 
+                        className="responsive-input resize-none"
+                      />
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="terms" />
+                    <div className="flex items-start space-x-3 pt-2">
+                      <Checkbox id="terms" className="mt-1" />
                       <label
                         htmlFor="terms"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        className="text-sm leading-relaxed peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
                         Я согласен с{" "}
                         <Link href="/privacy" className="text-primary underline">
@@ -175,7 +188,7 @@ const Hero = () => {
                       </label>
                     </div>
                   </div>
-                  <Button type="submit" className="w-full">Отправить</Button>
+                  <Button type="submit" className="w-full responsive-button">Отправить заявку</Button>
                 </form>
               </DialogContent>
             </Dialog>
@@ -183,30 +196,34 @@ const Hero = () => {
         </motion.div>
 
         {/* Slider Navigation */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
+              className={`h-3 rounded-full transition-all duration-300 touch-target ${
                 currentSlide === index
-                  ? "bg-white w-10"
+                  ? "bg-white w-8 sm:w-12"
                   : "bg-white/50 hover:bg-white/80"
               }`}
+              aria-label={`Перейти к слайду ${index + 1}`}
             />
           ))}
         </div>
       </div>
 
       {/* Scroll Down Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block">
+      <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-8 hidden md:block z-10">
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="flex flex-col items-center text-white/80"
+          className="flex flex-col items-center text-white/80 hover:text-white transition-colors cursor-pointer"
+          onClick={() => {
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+          }}
         >
-          <span className="text-sm mb-2">Прокрутите вниз</span>
-          <ChevronDown size={20} />
+          <span className="text-sm mb-2 font-medium">Прокрутите</span>
+          <ChevronDown size={24} />
         </motion.div>
       </div>
     </section>

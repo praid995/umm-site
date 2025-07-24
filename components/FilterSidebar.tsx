@@ -317,25 +317,25 @@ const FilterSidebar = ({
   return (
     <>
       {/* Desktop Filter */}
-      <div className="hidden md:block w-64 flex-shrink-0">
-        <h3 className="font-semibold text-lg mb-4">Фильтры</h3>
+      <div className="hidden lg:block w-56 xl:w-64 flex-shrink-0">
+        <h3 className="font-semibold text-base xl:text-lg mb-4">Фильтры</h3>
         <FilterContent />
       </div>
 
       {/* Mobile Filter Button */}
-      <div className="md:hidden w-full mb-4">
+      <div className="lg:hidden w-full mb-4">
         <Sheet open={isMobileFilterOpen} onOpenChange={setIsMobileFilterOpen}>
           <SheetTrigger asChild>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full text-sm">
               <Filter className="mr-2 h-4 w-4" />
               Фильтры
             </Button>
           </SheetTrigger>
-          <SheetContent side="bottom" className="h-[80vh]">
+          <SheetContent side="bottom" className="h-[85vh] xs:h-[80vh]">
             <SheetHeader>
               <SheetTitle>Фильтры</SheetTitle>
             </SheetHeader>
-            <div className="mt-4 overflow-y-auto max-h-[calc(80vh-80px)]">
+            <div className="mt-4 overflow-y-auto max-h-[calc(85vh-80px)] xs:max-h-[calc(80vh-80px)]">
               <FilterContent />
             </div>
           </SheetContent>

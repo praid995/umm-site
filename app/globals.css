@@ -16,6 +16,38 @@
   }
 }
 
+/* Поддержка безопасных зон для мобильных устройств */
+@supports (padding: max(0px)) {
+  .safe-area-inset {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Улучшенная типографика для всех устройств */
+html {
+  font-size: clamp(14px, 2.5vw, 16px);
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Оптимизация для touch устройств */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
 @layer base {
   :root {
     --background: 210 40% 98%;
@@ -76,47 +108,258 @@
   * {
     @apply border-border;
   }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-semibold tracking-tight;
+    line-height: 1.2;
   }
+  
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
+  
   h2 {
-    @apply text-3xl md:text-4xl;
+    @apply text-xl xs:text-2xl sm:text-3xl md:text-4xl;
   }
+  
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-lg xs:text-xl sm:text-2xl md:text-3xl;
   }
+  
   h4 {
-    @apply text-xl md:text-2xl;
+    @apply text-base xs:text-lg sm:text-xl md:text-2xl;
   }
+  
   h5 {
-    @apply text-lg md:text-xl;
+    @apply text-sm xs:text-base sm:text-lg md:text-xl;
   }
+  
   h6 {
-    @apply font-bold md:text-lg;
+    @apply text-sm xs:text-base font-bold md:text-lg;
+  }
+  
+  p {
+    line-height: 1.6;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Улучшенная доступность для фокуса */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+  
+  /* Скрытие скроллбара для webkit браузеров */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
 @layer components {
   .container-custom {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+    @apply w-full mx-auto px-4 xs:px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24;
+    max-width: min(100vw - 2rem, 1400px);
+  }
+  
+  .container-narrow {
+    @apply w-full mx-auto px-4 xs:px-6 sm:px-8 md:px-12 lg:px-16;
+    max-width: min(100vw - 2rem, 1200px);
+  }
+  
+  .container-wide {
+    @apply w-full mx-auto px-4 xs:px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24;
+    max-width: min(100vw - 2rem, 1600px);
   }
   
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 xs:px-6 xs:py-3 text-sm xs:text-base font-medium text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 touch-target;
   }
   
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2.5 xs:px-6 xs:py-3 text-sm xs:text-base font-medium shadow-sm transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 touch-target;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 will-change-transform;
+  }
+
+  /* Современные адаптивные заголовки с fluid typography */
+  .responsive-heading-1 {
+    font-size: clamp(1.75rem, 4vw, 4rem);
+    @apply font-bold leading-tight tracking-tight;
+  }
+
+  .responsive-heading-2 {
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
+    @apply font-bold leading-tight tracking-tight;
+  }
+
+  .responsive-heading-3 {
+    font-size: clamp(1.25rem, 3vw, 2.25rem);
+    @apply font-semibold leading-tight tracking-tight;
+  }
+
+  /* Адаптивный текст с fluid typography */
+  .responsive-text-lg {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  .responsive-text-base {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 1.6;
+  }
+
+  /* Современные адаптивные отступы с fluid spacing */
+  .responsive-py {
+    padding-top: clamp(2rem, 8vw, 5rem);
+    padding-bottom: clamp(2rem, 8vw, 5rem);
+  }
+
+  .responsive-px {
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* Современные адаптивные сетки с CSS Grid */
+  .responsive-grid-1-2-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(1rem, 4vw, 2rem);
+  }
+
+  .responsive-grid-1-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+    gap: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* Адаптивная видимость элементов */
+  .mobile-hidden {
+    @apply hidden sm:block;
+  }
+
+  .mobile-only {
+    @apply block sm:hidden;
+  }
+  
+  .tablet-hidden {
+    @apply sm:hidden lg:block;
+  }
+  
+  .tablet-only {
+    @apply hidden sm:block lg:hidden;
+  }
+  
+  .desktop-only {
+    @apply hidden lg:block;
+  }
+
+  /* Современные адаптивные кнопки с touch targets */
+  .responsive-button {
+    @apply px-4 py-3 xs:px-6 xs:py-3 sm:px-8 sm:py-4 text-sm xs:text-base font-medium rounded-lg transition-all duration-200 touch-target;
+    min-height: 44px;
+  }
+
+  /* Современные адаптивные карточки */
+  .responsive-card {
+    padding: clamp(1rem, 4vw, 2rem);
+    @apply rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-md;
+  }
+  
+  /* Адаптивные изображения */
+  .responsive-image {
+    @apply w-full h-auto object-cover rounded-lg;
+  }
+  
+  /* Адаптивные формы */
+  .responsive-form {
+    @apply space-y-4 sm:space-y-6;
+  }
+  
+  .responsive-input {
+    @apply w-full px-4 py-3 text-base border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 touch-target;
+    min-height: 44px;
+  }
+  
+  /* Адаптивная навигация */
+  .responsive-nav {
+    @apply flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 lg:gap-8;
+  }
+  
+  /* Адаптивные модальные окна */
+  .responsive-modal {
+    @apply w-full max-w-sm xs:max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-4;
+  }
+  
+  /* Адаптивные таблицы */
+  .responsive-table {
+    @apply w-full overflow-x-auto;
+  }
+  
+  .responsive-table table {
+    @apply min-w-full;
+  }
+  
+  /* Утилиты для безопасных зон */
+  .safe-area-padding {
+    @apply safe-area-inset;
+  }
+  
+  /* Утилиты для скроллинга */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+  
+  /* Утилиты для производительности */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Адаптивные анимации */
+  @media (prefers-reduced-motion: reduce) {
+    .motion-safe {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  
+  /* Высококонтрастный режим */
+  @media (prefers-contrast: high) {
+    .high-contrast {
+      border-width: 2px;
+    }
+  }
+  
+  /* Темная тема для системных предпочтений */
+  @media (prefers-color-scheme: dark) {
+    .auto-dark {
+      @apply dark:bg-steel-900 dark:text-white;
+    }
   }
 }

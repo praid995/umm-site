@@ -54,12 +54,12 @@ const Benefits = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-steel-900">
+    <section className="responsive-py bg-gray-50 dark:bg-steel-900">
       <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Почему выбирают нас</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            МеталлПром - это надежный поставщик качественного металлопроката с полным циклом услуг
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <h2 className="responsive-heading-2 mb-4 sm:mb-6">Почему выбирают нас</h2>
+          <p className="responsive-text-lg text-muted-foreground max-w-3xl mx-auto">
+            УРАЛМЕТАЛЛОМАРКЕТ - это надежный поставщик качественного металлопроката с полным циклом услуг и 25-летним опытом работы
           </p>
         </div>
         
@@ -68,19 +68,23 @@ const Benefits = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="responsive-grid-1-2-3"
         >
           {benefitsData.map((benefit, index) => (
             <motion.div
               key={index}
               variants={item}
-              className="bg-white dark:bg-steel-800 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-steel-700 group hover:shadow-md transition-all duration-300"
+              className="responsive-card group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 will-change-transform"
             >
-              <div className="p-3 bg-primary/10 rounded-lg inline-block mb-4 group-hover:bg-primary/20 transition-colors">
+              <div className="p-3 sm:p-4 bg-primary/10 rounded-xl inline-block mb-4 sm:mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                 {benefit.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
-              <p className="text-muted-foreground">{benefit.description}</p>
+              <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 group-hover:text-primary transition-colors">
+                {benefit.title}
+              </h3>
+              <p className="responsive-text-base text-muted-foreground leading-relaxed">
+                {benefit.description}
+              </p>
             </motion.div>
           ))}
         </motion.div>

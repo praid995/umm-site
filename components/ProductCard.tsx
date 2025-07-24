@@ -55,7 +55,7 @@ const ProductCard = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Container */}
-      <div className="relative h-48 overflow-hidden bg-gray-100 dark:bg-steel-700">
+      <div className="relative h-32 xs:h-40 sm:h-48 overflow-hidden bg-gray-100 dark:bg-steel-700">
         <Image
           src={image}
           alt={name}
@@ -64,17 +64,17 @@ const ProductCard = ({
             isHovered ? "scale-110" : "scale-100"
           }`}
         />
-        <div className="absolute top-2 left-2 flex flex-col gap-2">
+        <div className="absolute top-1.5 xs:top-2 left-1.5 xs:left-2 flex flex-col gap-1 xs:gap-2">
           {isNew && (
-            <Badge className="bg-blue-500 hover:bg-blue-600">Новинка</Badge>
+            <Badge className="bg-blue-500 hover:bg-blue-600 text-xs px-2 py-0.5">Новинка</Badge>
           )}
           {isPopular && (
-            <Badge className="bg-copper-500 hover:bg-copper-600">
+            <Badge className="bg-copper-500 hover:bg-copper-600 text-xs px-2 py-0.5">
               Популярное
             </Badge>
           )}
           {!inStock && (
-            <Badge variant="outline" className="bg-white/80 text-gray-700">
+            <Badge variant="outline" className="bg-white/80 text-gray-700 text-xs px-2 py-0.5">
               Под заказ
             </Badge>
           )}
@@ -82,21 +82,21 @@ const ProductCard = ({
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <div className="mb-4">
-          <div className="text-sm text-muted-foreground mb-1">{category}</div>
+      <div className="p-3 xs:p-4 sm:p-5">
+        <div className="mb-3 xs:mb-4">
+          <div className="text-xs xs:text-sm text-muted-foreground mb-1">{category}</div>
           <Link href={`/product/${id}`}>
-            <h3 className="text-lg font-semibold hover:text-primary transition-colors line-clamp-2">
+            <h3 className="text-sm xs:text-base sm:text-lg font-semibold hover:text-primary transition-colors line-clamp-2">
               {name}
             </h3>
           </Link>
         </div>
 
         {/* Specifications */}
-        <ul className="space-y-1 mb-5">
+        <ul className="space-y-1 mb-3 xs:mb-4 sm:mb-5">
           {Object.entries(specs).map(([key, value]) => (
-            <li key={key} className="text-sm flex">
-              <span className="text-muted-foreground w-24 flex-shrink-0">
+            <li key={key} className="text-xs xs:text-sm flex">
+              <span className="text-muted-foreground w-16 xs:w-20 sm:w-24 flex-shrink-0">
                 {key}:
               </span>
               <span className="font-medium">{value}</span>
@@ -104,21 +104,25 @@ const ProductCard = ({
           ))}
         </ul>
 
-        <div className="flex gap-2 mt-auto">
-          <Button variant="outline" size="sm" asChild>
+        <div className="flex flex-col xs:flex-row gap-2 mt-auto">
+          <Button variant="outline" size="sm" asChild className="text-xs xs:text-sm">
             <Link href={`/product/${id}`}>
-              Подробнее
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <span className="xs:hidden">Подробнее</span>
+              <span className="hidden xs:inline">Подробнее</span>
+              <ArrowRight className="ml-1 xs:ml-2 h-3 w-3 xs:h-4 xs:w-4" />
             </Link>
           </Button>
           
           <Dialog>
             <DialogTrigger asChild>
-              <Button size="sm">Запросить цену</Button>
+              <Button size="sm" className="text-xs xs:text-sm">
+                <span className="xs:hidden">Цена</span>
+                <span className="hidden xs:inline">Запросить цену</span>
+              </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="w-[95vw] max-w-md mx-auto">
               <DialogHeader>
-                <DialogTitle>Запрос цены: {name}</DialogTitle>
+                <DialogTitle className="text-sm xs:text-base">Запрос цены: {name}</DialogTitle>
                 <DialogDescription>
                   Заполните форму и наш менеджер рассчитает стоимость и свяжется с вами
                 </DialogDescription>
@@ -149,7 +153,7 @@ const ProductCard = ({
                     <Checkbox id="terms" />
                     <label
                       htmlFor="terms"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-xs xs:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
                       Я согласен с{" "}
                       <Link href="/privacy" className="text-primary underline">

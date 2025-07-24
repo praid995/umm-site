@@ -166,7 +166,7 @@ export default function CatalogPage() {
 
   return (
     <>
-      <div className="bg-gray-50 dark:bg-steel-900 py-10 md:py-16">
+      <div className="bg-gray-50 dark:bg-steel-900 py-6 xs:py-8 sm:py-10 md:py-16">
         <div className="container-custom">
           <Breadcrumb className="mb-6">
             <BreadcrumbList>
@@ -180,15 +180,15 @@ export default function CatalogPage() {
             </BreadcrumbList>
           </Breadcrumb>
           
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Каталог металлопроката</h1>
-          <p className="text-lg text-muted-foreground max-w-3xl">
+          <h1 className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">Каталог металлопроката</h1>
+          <p className="text-sm xs:text-base sm:text-lg text-muted-foreground max-w-3xl">
             Широкий выбор высококачественного металлопроката различных марок и размеров для любых нужд производства и строительства.
           </p>
         </div>
       </div>
       
-      <div className="container-custom py-10">
-        <div className="flex flex-col md:flex-row gap-8">
+      <div className="container-custom py-6 xs:py-8 sm:py-10">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           {/* Sidebar */}
           <FilterSidebar 
             forms={formOptions} 
@@ -201,12 +201,12 @@ export default function CatalogPage() {
           {/* Main Content */}
           <div className="flex-1">
             {/* View switcher and sorting */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
                 <Button
                   variant={viewMode === "categories" ? "default" : "outline"}
                   onClick={() => setViewMode("categories")}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-3 sm:px-4 flex-1 sm:flex-none"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
@@ -214,28 +214,30 @@ export default function CatalogPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                   </svg>
-                  Категории
+                  <span className="hidden xs:inline">Категории</span>
+                  <span className="xs:hidden">Кат.</span>
                 </Button>
                 <Button
                   variant={viewMode === "products" ? "default" : "outline"}
                   onClick={() => setViewMode("products")}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-3 sm:px-4 flex-1 sm:flex-none"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                   </svg>
-                  Все товары
+                  <span className="hidden xs:inline">Все товары</span>
+                  <span className="xs:hidden">Товары</span>
                 </Button>
               </div>
               
               {viewMode === "products" && (
-                <div className="flex items-center gap-2 w-full sm:w-auto">
+                <div className="flex items-center gap-2 w-full sm:w-auto mt-2 sm:mt-0">
                   <ArrowDownUp size={18} className="text-muted-foreground" />
                   <Select
                     value={sortOption}
                     onValueChange={setSortOption}
                   >
-                    <SelectTrigger className="w-full sm:w-[180px]">
+                    <SelectTrigger className="w-full sm:w-[160px] lg:w-[180px] text-xs sm:text-sm">
                       <SelectValue placeholder="Сортировка" />
                     </SelectTrigger>
                     <SelectContent>
@@ -251,7 +253,7 @@ export default function CatalogPage() {
             
             {/* Categories View */}
             {viewMode === "categories" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                 {categories.map((category) => (
                   <CategoryCard key={category.id} {...category} />
                 ))}
@@ -260,7 +262,7 @@ export default function CatalogPage() {
             
             {/* Products View */}
             {viewMode === "products" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                 {featuredProducts.map((product) => (
                   <ProductCard key={product.id} {...product} />
                 ))}
@@ -269,46 +271,48 @@ export default function CatalogPage() {
             
             {/* Pagination */}
             {viewMode === "products" && (
-              <div className="flex justify-center mt-12">
+              <div className="flex justify-center mt-8 sm:mt-12">
                 <nav className="flex items-center gap-1">
                   <Button
                     variant="outline"
-                    size="icon"
+                    size="sm"
                     disabled
+                    className="h-8 w-8 sm:h-10 sm:w-10"
                   >
                     <ChevronRight className="h-4 w-4 rotate-180" />
                   </Button>
                   <Button
                     variant="default"
-                    size="icon"
-                    className="size-8"
+                    size="sm"
+                    className="h-8 w-8 sm:h-10 sm:w-10 text-xs sm:text-sm"
                   >
                     1
                   </Button>
                   <Button
                     variant="outline"
-                    size="icon"
-                    className="size-8"
+                    size="sm"
+                    className="h-8 w-8 sm:h-10 sm:w-10 text-xs sm:text-sm"
                   >
                     2
                   </Button>
                   <Button
                     variant="outline"
-                    size="icon"
-                    className="size-8"
+                    size="sm"
+                    className="h-8 w-8 sm:h-10 sm:w-10 text-xs sm:text-sm"
                   >
                     3
                   </Button>
                   <Button
                     variant="outline"
-                    size="icon"
-                    className="size-8"
+                    size="sm"
+                    className="h-8 w-8 sm:h-10 sm:w-10 text-xs sm:text-sm"
                   >
                     4
                   </Button>
                   <Button
                     variant="outline"
-                    size="icon"
+                    size="sm"
+                    className="h-8 w-8 sm:h-10 sm:w-10"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
