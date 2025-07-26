@@ -3,7 +3,6 @@ import Benefits from "@/components/Benefits";
 import CategoryCard from "@/components/CategoryCard";
 import ChatWidget from "@/components/ChatWidget";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FadeIn, StaggerChildren, StaggerItem } from "@/components/Microinteractions";
 import Link from "next/link";
 import Image from "next/image";
@@ -55,25 +54,6 @@ export default function Home() {
     },
   ];
   
-  // Sample partners/certificates
-  const partners = [
-    { id: 1, name: "Газпром", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Gazprom-Logo.svg/1280px-Gazprom-Logo.svg.png" },
-    { id: 2, name: "Роснефть", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Rosneft_Logo.svg/1280px-Rosneft_Logo.svg.png" },
-    { id: 3, name: "ЛУКОЙЛ", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Logo_of_LUKOIL.svg/1280px-Logo_of_LUKOIL.svg.png" },
-    { id: 4, name: "Росатом", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Rosatom_logo.svg/1280px-Rosatom_logo.svg.png" },
-    { id: 5, name: "РЖД", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Russian_Railways_official_logo.svg/1280px-Russian_Railways_official_logo.svg.png" },
-    { id: 6, name: "ВостокСтрой", logo: "https://placehold.co/200x80/e3e3e3/666666.png?text=ВостокСтрой" },
-  ];
-  
-  // Sample certifications
-  const certifications = [
-    { id: 1, name: "ISO 9001", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/ISO_9001_Logo.svg/1200px-ISO_9001_Logo.svg.png" },
-    { id: 2, name: "ГОСТ Р", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/GOST_R.svg/1200px-GOST_R.svg.png" },
-    { id: 3, name: "ISO 14001", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/ISO_14001.svg/1200px-ISO_14001.svg.png" },
-    { id: 4, name: "ТУ Сертификация", logo: "https://placehold.co/200x80/e3e3e3/666666.png?text=ТУ+Сертификат" },
-    { id: 5, name: "Евразийский Стандарт", logo: "https://placehold.co/200x80/e3e3e3/666666.png?text=EAC" },
-    { id: 6, name: "Ростехнадзор", logo: "https://placehold.co/200x80/e3e3e3/666666.png?text=Ростехнадзор" },
-  ];
 
   return (
     <>
@@ -109,65 +89,6 @@ export default function Home() {
               </Link>
             </Button>
           </div>
-        </div>
-      </section>
-      
-      {/* Partners & Certifications Section */}
-      <section className="py-20 bg-gray-50 dark:bg-steel-900">
-        <div className="container-custom">
-          <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Наши партнеры и сертификаты</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Мы сотрудничаем с ведущими компаниями и обладаем всеми необходимыми сертификатами качества
-              </p>
-            </div>
-          </FadeIn>
-          
-          <Tabs defaultValue="partners" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
-              <TabsTrigger value="partners">Партнеры</TabsTrigger>
-              <TabsTrigger value="certifications">Сертификаты</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="partners">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
-                {partners.map((partner) => (
-                  <div 
-                    key={partner.id} 
-                    className="bg-white dark:bg-steel-800 p-6 rounded-lg flex items-center justify-center h-32 border border-gray-100 dark:border-steel-700 hover:shadow-md transition-shadow"
-                  >
-                    <Image
-                      src={partner.logo}
-                      alt={partner.name}
-                      width={140}
-                      height={60}
-                      className="max-h-16 object-contain"
-                    />
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="certifications">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
-                {certifications.map((cert) => (
-                  <div 
-                    key={cert.id} 
-                    className="bg-white dark:bg-steel-800 p-6 rounded-lg flex items-center justify-center h-32 border border-gray-100 dark:border-steel-700 hover:shadow-md transition-shadow"
-                  >
-                    <Image
-                      src={cert.logo}
-                      alt={cert.name}
-                      width={140}
-                      height={60}
-                      className="max-h-16 object-contain"
-                    />
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
         </div>
       </section>
       

@@ -49,18 +49,18 @@ const Footer = () => {
             <ul className="space-y-3 text-gray-300">
               <li>
                 <Link 
-                  href="/catalog/steel" 
+                  href="/catalog/black-metal" 
                   className="hover:text-white transition-colors touch-target block py-1"
                 >
-                  Сталь
+                  Чёрный металлопрокат
                 </Link>
               </li>
               <li>
                 <Link 
-                  href="/catalog/aluminum" 
+                  href="/catalog/colored-metal" 
                   className="hover:text-white transition-colors touch-target block py-1"
                 >
-                  Алюминий
+                  Цветной металлопрокат
                 </Link>
               </li>
               <li>
@@ -73,42 +73,26 @@ const Footer = () => {
               </li>
               <li>
                 <Link 
-                  href="/catalog/tube" 
+                  href="/services/delivery" 
                   className="hover:text-white transition-colors touch-target block py-1"
                 >
-                  Трубы
+                  Доставка
                 </Link>
               </li>
               <li>
                 <Link 
-                  href="/catalog/sheet" 
+                  href="/services/plasma-cutting" 
                   className="hover:text-white transition-colors touch-target block py-1"
                 >
-                  Листы
+                  Плазменная резка
                 </Link>
               </li>
               <li>
                 <Link 
-                  href="/catalog/profile" 
+                  href="/services/cutting-to-size" 
                   className="hover:text-white transition-colors touch-target block py-1"
                 >
-                  Профили
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/catalog/circle" 
-                  className="hover:text-white transition-colors touch-target block py-1"
-                >
-                  Круги
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/catalog/fittings" 
-                  className="hover:text-white transition-colors touch-target block py-1"
-                >
-                  Арматура
+                  Резка в размер
                 </Link>
               </li>
             </ul>
@@ -120,18 +104,26 @@ const Footer = () => {
             <ul className="space-y-3 text-gray-300">
               <li>
                 <Link 
-                  href="/services/cutting" 
+                  href="/services/delivery" 
                   className="hover:text-white transition-colors touch-target block py-1"
                 >
-                  Резка металла
+                  Доставка Ж/Д и Автотранспортом
                 </Link>
               </li>
               <li>
                 <Link 
-                  href="/services/delivery" 
+                  href="/services/plasma-cutting" 
                   className="hover:text-white transition-colors touch-target block py-1"
                 >
-                  Доставка
+                  Плазменная резка
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/services/cutting-to-size" 
+                  className="hover:text-white transition-colors touch-target block py-1"
+                >
+                  Резка в размер
                 </Link>
               </li>
               <li>
@@ -140,22 +132,6 @@ const Footer = () => {
                   className="hover:text-white transition-colors touch-target block py-1"
                 >
                   О компании
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/blog" 
-                  className="hover:text-white transition-colors touch-target block py-1"
-                >
-                  Блог
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/faq" 
-                  className="hover:text-white transition-colors touch-target block py-1"
-                >
-                  FAQ
                 </Link>
               </li>
               <li>

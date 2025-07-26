@@ -37,17 +37,21 @@ const navLinks = [
     href: "/catalog", 
     label: "Каталог",
     subMenu: [
-      { href: "/catalog/steel", label: "Сталь" },
-      { href: "/catalog/aluminum", label: "Алюминий" },
-      { href: "/catalog/stainless", label: "Нержавейка" },
-      { href: "/services/cutting", label: "Резка" },
-      { href: "/services/delivery", label: "Доставка" }
+      { href: "/catalog/black-metal", label: "Чёрный металлопрокат" },
+      { href: "/catalog/colored-metal", label: "Цветной металлопрокат" },
+      { href: "/catalog/stainless", label: "Нержавейка" }
     ]
   },
   { href: "/about", label: "О компании" },
-  { href: "/services", label: "Услуги" },
-  { href: "/blog", label: "Блог" },
-  { href: "/faq", label: "FAQ" },
+  { 
+    href: "/services", 
+    label: "Услуги",
+    subMenu: [
+      { href: "/services/delivery", label: "Доставка Ж/Д и Автотранспортом" },
+      { href: "/services/plasma-cutting", label: "Плазменная резка" },
+      { href: "/services/cutting-to-size", label: "Резка в размер" }
+    ]
+  },
   { href: "/contact", label: "Контакты" },
 ];
 
